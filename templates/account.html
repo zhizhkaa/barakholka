@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="d-flex flex-row justify-content-center my-3">
+        <div class="d-flex flex-column">
+            <!-- Карточка пользователя -->
+            <div class="card p-3 mb-3">
+                <div>
+                    <h2> {{ user.last_name}} {{ user.first_name }} {{ user.surname }} </h2>
+                    <h3> {{ user.username }} </h3>
+                    <p> {{ user.email }}</p>
+                    <p> Номер телефона: +{{ user.phone_number }} </p>
+                    <p> Дата рождения: {{ user.birth_date }}</p>
+                </div>
+            </div>
+            <!-- Карточка отзывов -->
+            <div class="card p-3 mb-3">
+                <h2> Отзывы </h2>
+                {% for review in reviews %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"> От: {{ review.user_comment }} - Рейтинг: {{ review.rating }} </h5>
+                        <p class="card-body"> {{ review.text }} </p>
+                        <p> {{ review.created }} </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="d-flex flex-column px-3">
+            <!-- Карточка Объявления -->
+            <div class="card p-3 mb-3">
+                Объявления
+            </div>
+            <!-- Карточка сделки -->
+            <div class="card p-3 mb-3">
+                Сделки
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
