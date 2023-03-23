@@ -1,7 +1,7 @@
 from unicodedata import category
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import CustomUser, Post, File, PostCategory, Comment
+from .models import CustomUser, Deal, Post, File, PostCategory, Comment
 from django.db.models import Q
 
 
@@ -30,4 +30,6 @@ def search(request):
 def account(request):
     current_user = request.user
     reviews = Comment.objects.filter(user=current_user.id).order_by('-created')
-    return render(request, 'account.html', {'reviews' : reviews})
+    posts = Post.objects.filter(seller=current_user.id).order_by('-post_id')
+    deals = Deal.objects.filter(buyer=current_user.id).order_by('status')
+    return render(request, 'account.html', {'reviews' : reviews, 'posts' : posts, 'deals' : deals})

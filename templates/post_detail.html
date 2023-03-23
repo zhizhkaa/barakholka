@@ -14,8 +14,10 @@
       <div class="card-body">
         <p class="card-text">{{ post.status }} - {{ post.seller }} </p>
         <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
+        <p class="card-text "> {{ post.address }}</p>
         <p class="text-muted"> {{ post.category }}</p>
         <h2 class="card-text"> {{ post.price }} Руб </h2>
+        
         <p class="scrollmenu">
           {% for file in files %}
           {% if post.post_id == file.post_id %}
@@ -23,6 +25,7 @@
           {% endif %}
           {% endfor %}
         </p>
+
         <p class="card-text "> {{ post.description }}</p>
 
         <div class="input-group-append">
