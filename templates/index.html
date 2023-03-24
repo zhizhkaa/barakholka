@@ -21,19 +21,21 @@
         white-space: nowrap;
     }
 </style>
+
 <div class="container">
+
+    <!-- Поиск и Категории -->
     <div class="row justify-content-center">
 
+        <!-- Поиск -->
         <form class="input-group mt-3 col-md-8" action="{% url 'search_results' %}" method="get">
             <input name="q" type="text" class="form-control" placeholder="Поиск..." aria-label="Поиск">
-
-            
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit">Поиск</button>
             </div>
         </form>
 
-
+        <!-- Категории -->
         <div class="input-group mt-3 col-md-8">
             <select class="custom-select" id="inputGroupSelect04">
                 <option selected>Категория...</option>
@@ -46,16 +48,20 @@
             </div>
         </div>
     </div>
-</div>
-<div class="container">
+
+    <!-- Список объявлений -->
     <div class="row justify-content-center">
-        <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
+            <!-- Объявление -->
             {% for post in posts %}
             <div class="card mb-4">
                 <div class="card-body">
+
+                    <!-- Заголовок объявления -->
                     <h2 class="card-title">{{ post.title }}</h2>
                     <p class=>{{ post.category }} </p>
+
+                    <!-- Изображения -->
                     <p class="scrollmenu">
                         {% for file in files %}
                         {% if post.post_id == file.post_id %}
@@ -63,7 +69,10 @@
                         {% endif %}
                         {% endfor %}
                     </p>
+                    <!-- Цена -->
                     <p class="card-text">{{ post.price }} Руб </p>
+
+                    <!-- Кнопка "Подробнее" -->
                     <a href="{% url 'post_detail' pk=post.pk%}" class="btn btn-primary"> Подробнее </a>
                 </div>
             </div>

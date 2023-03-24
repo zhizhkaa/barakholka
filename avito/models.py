@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
 
-
+# Таблица "Города"
 class City(models.Model):
 
     city_id = models.AutoField(primary_key=True)
@@ -16,7 +16,7 @@ class City(models.Model):
     def __str__(self):
         return self.city
 
-
+# Таблица "Улицы"
 class Street(models.Model):
 
     stree_id = models.AutoField(primary_key=True)
@@ -29,7 +29,7 @@ class Street(models.Model):
     def __str__(self):
         return self.street
 
-
+# Таблица "Адреса" - Улицы + Города
 class Address(models.Model):
 
     address_id = models.AutoField(primary_key=True)
@@ -51,7 +51,7 @@ class Address(models.Model):
     def get_update_url(self):
         return reverse("avito_address_update", args=(self.pk,))
 
-
+# Таблица "Статусы сделок"
 class DealStatus(models.Model):
 
     dealStatus_id = models.AutoField(primary_key=True)
@@ -71,7 +71,7 @@ class DealStatus(models.Model):
     def get_update_url(self):
         return reverse("avito_deal_status_update", args=(self.pk,))
 
-
+# Таблица "Статусы объявлений"
 class PostStatus(models.Model):
 
     postStatus_id = models.AutoField(primary_key=True)
@@ -91,11 +91,10 @@ class PostStatus(models.Model):
     def get_update_url(self):
         return reverse("avito_post_status_update", args=(self.pk,))
 
-
+# Таблица "Категории объявлений"
 class PostCategory(models.Model):
 
     postCategory_id = models.AutoField(primary_key=True)
-    # Fields
     name = models.CharField(max_length=30)
 
     class Meta:
@@ -111,7 +110,7 @@ class PostCategory(models.Model):
     def get_update_url(self):
         return reverse("avito_post_category_update", args=(self.pk,))
 
-
+# Таблица "Пользователь"
 class CustomUser(AbstractUser):
 
     first_name = models.CharField(max_length=30)
@@ -137,7 +136,7 @@ class CustomUser(AbstractUser):
     def get_update_url(self):
         return reverse("avito_user_update", args=(self.pk,))
 
-
+# Таблица "Объявления" - Пользователи + Адреса + Категории + Статусы объявлений
 class Post(models.Model):
 
     post_id = models.AutoField(primary_key=True)
@@ -166,15 +165,17 @@ class Post(models.Model):
     def get_update_url(self):
         return reverse("avito_post_update", args=(self.pk,))
 
-
+# Таблица "Комментарии" - Пользователи
 class Comment(models.Model):
 
     comment_id = models.AutoField(primary_key=True)
 
+    # На кого отзыв
     user = models.ForeignKey(CustomUser, on_delete=models.RESTRICT,
-                             related_name='%(class)s_requests_created')           # На кого отзыв
+                             related_name='%(class)s_requests_created')
+    # От кого отзыв
     user_comment = models.ForeignKey(
-        CustomUser, on_delete=models.RESTRICT)   # От кого
+        CustomUser, on_delete=models.RESTRICT)
 
     text = models.TextField(max_length=100)
     rating = models.PositiveSmallIntegerField()
@@ -194,7 +195,7 @@ class Comment(models.Model):
     def get_update_url(self):
         return reverse("avito_comments_update", args=(self.pk,))
 
-
+# Таблица "Сделки" - Объявления + Пользователи + Статусы сделок
 class Deal(models.Model):
 
     deal_id = models.AutoField(primary_key=True)
@@ -217,10 +218,9 @@ class Deal(models.Model):
     def get_update_url(self):
         return reverse("avito_deal_update", args=(self.pk,))
 
-
+# Таблица "Вложения" - Объявления
 class File(models.Model):
 
-    # Fields
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     link = models.URLField()
 

@@ -12,12 +12,15 @@
   <div class="row justify-content-center">
     <div class="col-md-10 card mb-4  mt-3 left  top">
       <div class="card-body">
-        <p class="card-text">{{ post.status }} - {{ post.seller }} </p>
+
+        <!-- Заголовок объявления -->
+        <p class="card-text"> {{ post.status }} - {{ post.seller }} </p>
         <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
         <p class="card-text "> {{ post.address }}</p>
         <p class="text-muted"> {{ post.category }}</p>
         <h2 class="card-text"> {{ post.price }} Руб </h2>
-        
+
+        <!-- Изображения -->
         <p class="scrollmenu">
           {% for file in files %}
           {% if post.post_id == file.post_id %}
@@ -26,13 +29,16 @@
           {% endfor %}
         </p>
 
+        <!-- Описание -->
         <p class="card-text "> {{ post.description }}</p>
-
+        
         <div class="input-group-append">
           <div class="pr-3">
+            <!-- TODO: Функционал кнопки "Забронировать"-->
             <button class="btn btn-primary pr-3" type="button">Заброинровать</button>
           </div>
           <div>
+            <!-- Кнопка "Назад" -->
             <a href="{% url 'home' %}" class="btn btn-outline-secondary"> Назад </a>
           </div>
         </div>

@@ -4,13 +4,14 @@
 
 <div class="container">
     <div class="d-flex flex-row justify-content-center my-3">
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column w-50">
             <!-- Карточка пользователя -->
             <div class="card p-3 mb-3">
                 <div>
                     <h2> {{ user.last_name}} {{ user.first_name }} {{ user.surname }} </h2>
-                    <h3> {{ user.username }} </h3>
-                    <p> {{ user.email }}</p>
+                    <h3> /{{ user.username }} </h3>
+                    <hr>
+                    <p> E-mail: {{ user.email }}</p>
                     <p> Номер телефона: +{{ user.phone_number }} </p>
                     <p> Дата рождения: {{ user.birth_date }}</p>
                 </div>
@@ -18,26 +19,34 @@
             <!-- Карточка отзывов -->
             <div class="card p-3">
                 <h2> Отзывы </h2>
-                {% for review in reviews %}
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <h5 class="card-title"> От: {{ review.user_comment }} - Оценка: {{ review.rating }}/10 </h5>
-                        <p class="card-body"> {{ review.text }} </p>
-                        <p> {{ review.created }} </p>
+                <div>
+                    {% for review in reviews %}
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <h4 class="card-title"> {{ review.user_comment }} </h4>
+                            <h5 class="mb-4"> Оценка: {{ review.rating }}/10 </h5>
+                            <div class="text-break"> 
+                                {{ review.text }}
+                            </div>
+                            <hr>
+                            <p class="text-muted"> {{ review.created }} </p>
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </div>
-        <div class="d-flex flex-column px-3">
+        <div class="d-flex flex-column px-3 w-50">
             <!-- Карточка Объявления -->
             <div class="card p-3 mb-3">
                 <h2> Объявления </h2>
                 {% for post in posts %}
+
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"> {{ post.title }} - {{ post.price}} Руб </h5>
-                        <p class="text-muted"> {{ post.category }} </p> 
+                        <a class="card-title h5" href="{% url 'post_detail' pk=post.pk%}"> {{ post.title }} -
+                            {{ post.price}} Руб </a>
+                        <p class="text-muted"> {{ post.category }} </p>
                     </div>
                 </div>
                 {% endfor %}
@@ -49,8 +58,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"> {{ deal.post }} </h5>
-                        <p class="card-text"> Статус сделки: {{ deal.status}} <p>
-                        <p class="text-muted"> Дата сделки: {{ deal.date }} </p> 
+                        <p class="card-text"> Статус сделки: {{ deal.status}}
+                            <hr>
+                        <p class="text-muted"> Дата сделки: {{ deal.date }} </p>
                     </div>
                 </div>
                 {% endfor %}

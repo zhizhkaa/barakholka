@@ -36,25 +36,27 @@
             padding-top: 10px;
         }
     </style>
+    <!-- Header -->
     <header class="masthead">
         <div class="overlay"></div>
         <div class="container">
             <div class="d-flex justify-content-between">
+                <!-- Название сайта -->
                 <div class="site-heading">
                     <a href="{% url 'home' %}">
                         <h3 class=" site-heading my-4 mt-3 text-white font-weight-bold"> БАРАХОЛКА </h3>
                     </a>
                 </div>
+                <!-- Личный кабинет -->
                 <a href="{% url 'account' %}" class="mt-3 my-4 text-white"> {{ user.first_name }} {{ user.last_name }} </a>
             </div>
         </div>
     </header>
     {% block content %}
-    <!-- Content Goes here -->
     {% endblock content %}
     <!-- Footer -->
     <footer class="py-3 bg-grey">
-        <p class="m-0 text-dark text-center ">(С) БАРАХОЛКА</p>
+        <p class="m-0 text-dark text-center ">Барахолка, 2023</p>
     </footer>
 </body>
 
